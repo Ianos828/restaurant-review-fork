@@ -10,7 +10,7 @@ package application.restaurant;
  * and descriptive metadata such as tags.
  */
 public class Restaurant {
-    private final String restaurantId;
+    private final Integer restaurantId;
     private final String ownerId;
     private String name;
     private String address;
@@ -29,7 +29,7 @@ public class Restaurant {
      * @param description restaurant description
      * optional @param tags list of restaurant tags
      */
-    public Restaurant(String restaurantId, String ownerId, String name, String address,
+    public Restaurant(Integer restaurantId, String ownerId, String name, String address,
                       String contactNumber, String description/*, List<String> tags*/) {
         this.restaurantId = restaurantId;
         this.ownerId = ownerId;
@@ -45,7 +45,7 @@ public class Restaurant {
      *
      * @return restaurant id
      */
-    public String getRestaurantId() {
+    public Integer getRestaurantId() {
         return restaurantId;
     }
 
@@ -116,7 +116,7 @@ public class Restaurant {
      */
     @Override
     public String toString() {
-        return String.format("Restaurant ID: %s, Name: %s, Address: %s, Contact: %s, Description: %s",
+        return String.format("Restaurant ID: %d, Name: %s, Address: %s, Contact: %s, Description: %s",
                 restaurantId, name, address, contactNumber, description);
     }
 
