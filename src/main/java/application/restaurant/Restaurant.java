@@ -27,7 +27,6 @@ public class Restaurant {
      * @param address restaurant address
      * @param contactNumber restaurant contact number
      * @param description restaurant description
-     * optional @param tags list of restaurant tags
      */
     public Restaurant(Integer restaurantId, String ownerId, String name, String address,
                       String contactNumber, String description/*, List<String> tags*/) {
@@ -124,7 +123,7 @@ public class Restaurant {
      * Future coupling placeholder:
      *
      * public List<Review> getReviews(....){...}
-     * 
+     *
      * purpose:
      * Return all reviews associated with this restaurant by querying the central ReviewList
      * using this restaurant's id.
@@ -140,7 +139,7 @@ public class Restaurant {
      * Future coupling placeholder:
      *
      * public double getAverageRating(....){...}
-     * 
+     *
      * purpose:
      * Calculate the average rating for this restaurant from all associated reviews.
      *
@@ -154,7 +153,7 @@ public class Restaurant {
      * Future coupling placeholder:
      *
      * public int getReviewCount(....){...}
-     * 
+     *
      * purpose:
      * Return the total number of reviews for this restaurant.
      *

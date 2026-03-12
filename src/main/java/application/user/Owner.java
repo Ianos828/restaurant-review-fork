@@ -67,7 +67,7 @@ public class Owner extends User {
      * Future coupling placeholder:
      *
      * public List<Restaurant> getOwnedRestaurants(...){...}
-     * 
+     *
      * purpose:
      * Return all Restaurant objects owned by this owner by querying the stored
      * restaurant ids against a central RestaurantStorage / repository.
