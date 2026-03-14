@@ -107,6 +107,49 @@ Filtering Reviews
 ![Use Case Diagram](docs/architecture/use-case-diagram.png)
 Use Case Diagram
 
+### Use Cases
+
+<details>
+<summary>Add a Review</summary>
+
+> **Software System:** MealMeter\
+> **Use Case:** UC01 – Add a Review\
+> **Actor:** Restaurant Patron\
+> **Precondition:** Restaurant Patron is at the point of sale and is presented with the GUI\
+> **Guarantee:** The review is added to the list of reviews\
+> **MSS:**
+> 1. Restaurant Patron enters a rating for the food, cleanliness, and service
+> 2. Restaurant Patron enters a review
+> 3. Restaurant Patron submits the review
+> 4. MealMeter shows a success message
+> 5. MealMeter saves the review to the data file\
+> Use Case Ends.
+</details>
+
+<details>
+<summary>Delete a Review</summary>
+
+> **Software System:** MealMeter\
+> **Use Case:** UC02 – Delete a Review\
+> **Actor:** Restaurant Owner\
+> **Precondition:** Restaurant Owner is logged in\
+> **Guarantee:** The review is deleted from the list of reviews\
+> **MSS:**
+> 1. Restaurant Owner enters the index of the review to be deleted
+> 2. MealMeter deletes the review from the data file
+> 3. MealMeter shows a success message\
+> Use Case Ends.
+</details>
+
+[//]: # (- **UC3:** Add a tag to a review)
+
+[//]: # (- **UC4:** Sort reviews)
+
+[//]: # (- **UC5:** Filter reviews)
+
+[//]: # (- **UC6:** View all reviews)
+
+[//]: # (- **UC7:** View a specific review)
 ---
 
 ## Design Details
