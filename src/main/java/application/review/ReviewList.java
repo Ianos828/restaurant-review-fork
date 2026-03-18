@@ -142,26 +142,26 @@ public class ReviewList {
     }
 
     /**
-     * Returns all reviews whose overall rating is at least the specified minimum.
+     * Returns all reviews whose overall score is at least the specified minimum.
      *
-     * @param minimumRating the minimum overall rating
-     * @return a list of reviews meeting the rating threshold
+     * @param minimumScore the minimum overall score
+     * @return a list of reviews meeting the score threshold
      */
-    public List<Review> filterByMinimumOverallRating(double minimumRating) {
+    public List<Review> filterByMinimumOverallScore(double minimumScore) {
         return reviews.stream()
-                .filter(review -> review.getRating().getOverallRating() >= minimumRating)
+                .filter(review -> review.getRating().getOverallScore() >= minimumScore)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Returns a new list of reviews sorted by overall rating in descending order.
+     * Returns a new list of reviews sorted by overall score in descending order.
      *
-     * @return a new list of reviews sorted by overall rating
+     * @return a new list of reviews sorted by overall score
      */
-    public List<Review> sortByOverallRating() {
+    public List<Review> sortByDescendingOverallScore() {
         return reviews.stream()
                 .sorted(Comparator.comparingDouble(
-                        (Review review) -> review.getRating().getOverallRating())
+                        (Review review) -> review.getRating().getOverallScore())
                         .reversed())
                 .collect(Collectors.toList());
     }
