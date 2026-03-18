@@ -7,7 +7,7 @@ import application.parser.ArgumentParser;
  */
 public enum CommandType {
     EXIT("exit"),
-    ADD("add"),
+    ADD_REVIEW("review"),
     DELETE("delete"),
     LIST("list"),
     UNKNOWN("unknown");

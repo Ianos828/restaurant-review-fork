@@ -34,7 +34,7 @@ public class CommandParser {
         case EXIT:
             command = new ExitCommand();
             break;
-        case ADD:
+        case ADD_REVIEW:
             arguments = parseArguments(AddReviewCommand.DELIMITERS, splitInput[1]);
             command = new AddReviewCommand(arguments);
             break;
