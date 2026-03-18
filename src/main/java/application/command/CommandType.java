@@ -8,6 +8,8 @@ import application.parser.ArgumentParser;
 public enum CommandType {
     EXIT("exit"),
     ADD_REVIEW("review"),
+    ADD_TAG("addtag"),
+    DELETE_TAG("deletetag"),
     DELETE("delete"),
     LIST("list"),
     UNKNOWN("unknown");

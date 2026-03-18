@@ -4,13 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import application.command.AddReviewCommand;
-import application.command.Command;
-import application.command.CommandType;
-import application.command.DeleteReviewCommand;
-import application.command.ExitCommand;
-import application.command.ListReviewsCommand;
-import application.command.UnknownCommand;
+import application.command.*;
 
 /**
  * CommandParser class for parsing user input into commands.
@@ -37,6 +31,10 @@ public class CommandParser {
         case ADD_REVIEW:
             arguments = parseArguments(AddReviewCommand.DELIMITERS, splitInput[1]);
             command = new AddReviewCommand(arguments);
+            break;
+        case ADD_TAG:
+            arguments = parseArguments(AddTagCommand.DELIMITERS, splitInput[1]);
+            command = new AddTagCommand(arguments);
             break;
         case DELETE:
             arguments = parseArguments(DeleteReviewCommand.DELIMITERS, splitInput[1]);

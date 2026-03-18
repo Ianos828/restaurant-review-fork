@@ -1,22 +1,19 @@
 package application.command;
 
-import java.util.Map;
-import java.util.Set;
-
 import application.exception.InvalidArgumentException;
 import application.exception.MissingArgumentException;
 import application.parser.ArgumentParser;
-import application.review.Rating;
 import application.review.Review;
 import application.review.ReviewList;
 import application.review.Tag;
 import application.storage.Storage;
 
-/**
- * Class representing a command to add a review.
- */
-public class AddReviewCommand extends Command {
-    public static final Set<String> DELIMITERS = Set.of("/default", "/food", "/clean", "/service", "/tag");
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
+
+public class AddTagCommand extends Command {
+    public static final Set<String> DELIMITERS = Set.of("/default", "/tag");
     private final Map<String, String> commandArgs;
 
     /**
@@ -24,13 +21,13 @@ public class AddReviewCommand extends Command {
      *
      * @param commandArgs the arguments of the command
      */
-    public AddReviewCommand(Map<String, String> commandArgs) {
+    public AddTagCommand(Map<String, String> commandArgs) {
         this.commandArgs = commandArgs;
     }
 
+
     /**
-     * Executes the command to add a review to the list.
-     *
+     * Executes the command to add a tag to a review.
      * @param reviewList the list of reviews
      * @param storage the storage object
      * @return a string representation of the command result
@@ -42,27 +39,18 @@ public class AddReviewCommand extends Command {
             ReviewList reviewList,
             Storage storage
     ) throws MissingArgumentException, InvalidArgumentException {
-        //get all the arguments
-        String reviewBody = commandArgs.get("/default");
-        String foodScoreAsString = commandArgs.get("/food");
-        String cleanlinessScoreAsString = commandArgs.get("/clean");
-        String serviceScoreAsString = commandArgs.get("/service");
+        String indexAsString = commandArgs.get("/default");
         String tagsAsString = commandArgs.get("/tag");
 
-        //create a new Rating object with scores
-        Rating rating = ArgumentParser.toRating(
-                foodScoreAsString,
-                cleanlinessScoreAsString,
-                serviceScoreAsString
-        );
-
+        int index = ArgumentParser.toInt(indexAsString);
         Set<Tag> tags = ArgumentParser.toTags(tagsAsString);
 
-        //create a new Review object
-        Review review = new Review(reviewBody, rating, tags);
+        if (tags.isEmpty()) {
+            throw new InvalidArgumentException("No tags provided!");
+        }
 
-        reviewList.addReview(review);
+        Review review = reviewList.addTagToReview(index, tags);
 
-        return String.format("Added review to list:\n%s", review);
+        return String.format("Updated review with new tags:\n%s", review);
     }
 }

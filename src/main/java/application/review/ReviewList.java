@@ -3,6 +3,7 @@ package application.review;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import application.exception.InvalidArgumentException;
@@ -110,6 +111,20 @@ public class ReviewList {
      */
     public List<Review> getAllReviews() {
         return new ArrayList<>(reviews);
+    }
+
+    /**
+     * Adds the specified tags to the review at the specified index.
+     * @param index 1-based index of the review
+     * @param tags set of tags to add
+     * @return the modified review
+     * @throws InvalidArgumentException if the index is invalid
+     */
+    public Review addTagToReview(int index, Set<Tag> tags) throws InvalidArgumentException {
+        validateIndex(index);
+        Review review = reviews.get(index - 1);
+        tags.forEach(review::addTag);
+        return review;
     }
 
     /**

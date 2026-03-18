@@ -121,7 +121,7 @@ public class ArgumentParser {
      * @param tagsAsString the string of tags
      * @return a set of Tag objects
      */
-    public static Set<Tag> toTags (String tagsAsString) {
+    public static Set<Tag> toTags(String tagsAsString) {
         if (!isValidString(tagsAsString)) {
             return new HashSet<>();
         }

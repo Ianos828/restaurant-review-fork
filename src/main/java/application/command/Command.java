@@ -27,6 +27,8 @@ public abstract class Command {
      * @throws MissingArgumentException if commands do not receive their expected number of arguments
      * @throws InvalidArgumentException if commands do not receive their expected arguments in the correct format
      */
-    public abstract String execute(ReviewList reviewList, Storage storage)
-            throws MissingArgumentException, InvalidArgumentException, IOException;
+    public abstract String execute(
+            ReviewList reviewList,
+            Storage storage
+    ) throws MissingArgumentException, InvalidArgumentException, IOException;
 }
