@@ -32,7 +32,7 @@ public class CommandParser {
      */
     public static Command getCommand(String input)
         throws MissingArgumentException, InvalidArgumentException {
-        String[] splitInput = ArgumentParser.splitIntoPair(input, " ");
+        String[] splitInput = ArgumentParser.splitIntoPair(input.trim(), " ");
 
         CommandType commandType = CommandType.getCommandType(splitInput[0].toLowerCase());
 
@@ -100,7 +100,7 @@ public class CommandParser {
 
         for (String argument : argumentComponents) {
             if (delimiters.contains(argument)) {
-                argumentsMap.put(currentDelimiter, currentArgument.toString().strip().trim());
+                argumentsMap.put(currentDelimiter, currentArgument.toString().trim());
                 currentDelimiter = argument;
                 currentArgument = new StringBuilder();
             } else {
