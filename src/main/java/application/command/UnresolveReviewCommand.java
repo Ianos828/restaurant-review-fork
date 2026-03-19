@@ -1,0 +1,47 @@
+package application.command;
+
+import application.exception.InvalidArgumentException;
+import application.exception.MissingArgumentException;
+import application.parser.ArgumentParser;
+import application.review.Review;
+import application.review.ReviewList;
+import application.storage.Storage;
+
+import java.util.Map;
+import java.util.Set;
+
+public class UnresolveReviewCommand extends Command {
+    public static final Set<String> DELIMITERS = Set.of("/default");
+    private final int index;
+
+    /**
+     * Constructor for UnresolveReviewCommand class.
+     *
+     * @param commandArgs the arguments of the command
+     * @throws InvalidArgumentException if the index is not a number
+     * @throws MissingArgumentException if the index is missing
+     */
+    public UnresolveReviewCommand(Map<String, String> commandArgs)
+            throws InvalidArgumentException, MissingArgumentException {
+        String indexAsString = commandArgs.get("/default");
+        this.index = ArgumentParser.toInt(indexAsString);
+    }
+
+    /**
+     * Executes the command to unresolve a review in the list.
+     *
+     * @param reviews the list of reviews
+     * @param storage the storage object
+     * @return a string representation of the command result
+     * @throws InvalidArgumentException if the index is in the wrong format
+     */
+    @Override
+    public String execute(
+            ReviewList reviews,
+            Storage storage
+    ) throws InvalidArgumentException {
+        Review review = reviews.markOutstanding(index);
+
+        return String.format("%s\nmarked as outstanding!", review);
+    }
+}
