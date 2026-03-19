@@ -90,7 +90,7 @@ public record Tag(String tagName) {
         }
 
         //separate tags in string format
-        String[] listOfTagsAsString = tagsAsString.trim().split(" ");
+        String[] listOfTagsAsString = tagsAsString.trim().split(",");
 
         return Arrays.stream(listOfTagsAsString)
                 .map(Tag::new)
