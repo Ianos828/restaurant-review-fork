@@ -18,13 +18,13 @@ public class ArgumentParser {
             return new String[]{ "", "" };
         }
 
-        String[] split = input.strip().split(delimiter, 2);
+        String[] split = input.trim().split(delimiter, 2);
 
         if (split.length == 1) {
             return new String[]{ split[0], "" };
         }
 
-        split[1] = split[1].strip();
+        split[1] = split[1].trim();
         return split;
     }
 

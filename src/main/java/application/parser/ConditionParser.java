@@ -26,7 +26,7 @@ public class ConditionParser {
             return new HashSet<>();
         }
 
-        String[] conditions = conditionsAsString.split(",");
+        String[] conditions = conditionsAsString.trim().split(",");
 
         Set<Condition> conditionsSet = new HashSet<>();
 
