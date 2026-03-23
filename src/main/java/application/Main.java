@@ -15,24 +15,32 @@ import application.storage.Storage;
  */
 public class Main {
     public static void main(String[] args) {
-        ReviewList reviewList = new ReviewList();
         Storage storage = new Storage();
-        Scanner scanner = new Scanner(System.in);
+        ReviewList reviewList;
 
-        boolean shouldContinue = true;
+        try {
+            reviewList = storage.loadReviews();
+        } catch (IOException e) {
+            System.out.println("Warning: Failed to load reviews from storage. Starting with an empty list.");
+            reviewList = new ReviewList();
+        }
 
-        while (shouldContinue) {
-            System.out.print("> ");
-            String userInput = scanner.nextLine();
-            try {
-                Command command = CommandParser.getCommand(userInput);
-                String output = command.execute(reviewList, storage);
-                System.out.println(output);
-                shouldContinue = !command.isTerminatingCommand();
-            } catch (InvalidArgumentException | IOException | MissingArgumentException e) {
-                System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println("An unexpected error occurred: " + e.getMessage());
+        try (Scanner scanner = new Scanner(System.in)) {
+            boolean shouldContinue = true;
+
+            while (shouldContinue) {
+                System.out.print("> ");
+                String userInput = scanner.nextLine();
+                try {
+                    Command command = CommandParser.getCommand(userInput);
+                    String output = command.execute(reviewList, storage);
+                    System.out.println(output);
+                    shouldContinue = !command.isTerminatingCommand();
+                } catch (InvalidArgumentException | IOException | MissingArgumentException e) {
+                    System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("An unexpected error occurred: " + e.getMessage());
+                }
             }
         }
     }

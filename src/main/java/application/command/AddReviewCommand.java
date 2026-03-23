@@ -1,5 +1,6 @@
 package application.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -57,14 +58,12 @@ public class AddReviewCommand extends Command {
     public String execute(
             ReviewList reviews,
             Storage storage
-    ) throws InvalidArgumentException {
-        //create a new Rating object with scores
+    ) throws InvalidArgumentException, IOException {
         Rating rating = new Rating(foodScore, cleanlinessScore, serviceScore);
-
-        //create a new Review object
         Review review = new Review(reviewBody, rating, tagsToAdd);
 
         reviews.addReview(review);
+        storage.saveReviews(reviews);
 
         return String.format("Added review to list:\n%s", review);
     }
