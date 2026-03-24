@@ -1,5 +1,6 @@
 package application.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,18 +57,13 @@ public class DeleteTagsCommand extends Command {
     public String execute(
             ReviewList reviews,
             Storage storage
-    ) throws InvalidArgumentException {
-        //get the review object and its tags
+    ) throws InvalidArgumentException, IOException {
         Review review = reviews.getReview(index);
-
-        //get the new tags that are already in the review
         Set<Tag> existingTags = review.getMatchingTags(tagsToDelete);
-
-        //get the new tags that are not in the review
         Set<Tag> nonExistentTags = review.getNonMatchingTags(tagsToDelete);
 
-        //delete the existing tags from the review
         existingTags.forEach(review::removeTag);
+        storage.saveReviews(reviews);
 
         return String.format("""
                 Tags that do not exist in review: %s

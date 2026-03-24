@@ -1,5 +1,6 @@
 package application.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,8 +43,9 @@ public class UnresolveReviewCommand extends Command {
     public String execute(
             ReviewList reviews,
             Storage storage
-    ) throws InvalidArgumentException {
+    ) throws InvalidArgumentException, IOException {
         Review review = reviews.markOutstanding(index);
+        storage.saveReviews(reviews);
 
         return String.format("%s\nmarked as outstanding!", review);
     }

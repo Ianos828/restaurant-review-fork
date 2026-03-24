@@ -1,5 +1,6 @@
 package application.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,18 +56,13 @@ public class AddTagsCommand extends Command {
     public String execute(
             ReviewList reviews,
             Storage storage
-    ) throws InvalidArgumentException {
-        //get the review object and its tags
+    ) throws InvalidArgumentException, IOException {
         Review review = reviews.getReview(index);
-
-        //get the new tags that are already in the review
         Set<Tag> existingTags = review.getMatchingTags(tagsToAdd);
-
-        //get the new tags that are not in the review
         Set<Tag> nonExistentTags = review.getNonMatchingTags(tagsToAdd);
 
-        //add the non-existent tags to the review
         nonExistentTags.forEach(review::addTag);
+        storage.saveReviews(reviews);
 
         return String.format("""
                 Existing tags not added: %s
