@@ -115,8 +115,10 @@ public class MealMeterTest {
 
     @Test
     public void handleInput_exit_stillTerminates() {
+        mealMeter.handleInput("login secret");
         CommandResult result = mealMeter.handleInput("exit");
 
+        assertEquals("Goodbye!", result.output());
         assertTrue(result.shouldTerminate());
     }
 }
