@@ -1,11 +1,13 @@
 package application.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import application.auth.AuthManager;
 import application.exception.InvalidArgumentException;
 import application.exception.MissingArgumentException;
-import application.parser.Utility;
+import application.parser.ArgumentParser;
 import application.review.Review;
 import application.review.ReviewList;
 import application.storage.Storage;
@@ -15,29 +17,38 @@ import application.storage.Storage;
  */
 public class DeleteReviewCommand extends Command {
     public static final Set<String> DELIMITERS = Set.of("/default");
-    private final Map<String, String> commandArgs;
+    private final int index;
 
     /**
      * Constructor for DeleteReviewCommand class.
+     *
      * @param commandArgs the arguments of the command
+     * @throws InvalidArgumentException if the index is not a number
+     * @throws MissingArgumentException if the index is missing
      */
-    public DeleteReviewCommand(Map<String, String> commandArgs) {
-        this.commandArgs = commandArgs;
+    public DeleteReviewCommand(Map<String, String> commandArgs)
+            throws InvalidArgumentException, MissingArgumentException {
+        String indexAsString = commandArgs.get("/default");
+        this.index = ArgumentParser.toInt(indexAsString);
     }
 
     /**
      * Executes the command to delete a review from the list.
-     * @param reviewList the list of reviews
+     *
+     * @param reviews the list of reviews
      * @param storage the storage object
+     * @param manager the authentication manager
      * @return a string representation of the command result
-     * @throws MissingArgumentException if the index is missing
      * @throws InvalidArgumentException if the index is in the wrong format
      */
     @Override
-    public String execute(ReviewList reviewList, Storage storage)
-            throws MissingArgumentException, InvalidArgumentException {
-        int index = Utility.toInt(commandArgs.get("/default"));
-        Review review = reviewList.removeReview(index);
+    public String execute(
+            ReviewList reviews,
+            Storage storage,
+            AuthManager manager
+    ) throws InvalidArgumentException, IOException {
+        Review review = reviews.deleteReview(index);
+        storage.saveReviews(reviews);
 
         return String.format("%s\ndeleted!", review);
     }

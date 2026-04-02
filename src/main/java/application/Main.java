@@ -1,36 +1,32 @@
 package application;
 
-import java.io.IOException;
-import java.util.Scanner;
-
-import application.command.Command;
-import application.exception.InvalidArgumentException;
-import application.exception.MissingArgumentException;
-import application.parser.CommandParser;
-import application.review.ReviewList;
-import application.storage.Storage;
+import application.ui.Ui;
 
 /**
  * Main class.
  */
 public class Main {
     public static void main(String[] args) {
-        ReviewList reviewList = new ReviewList();
-        Storage storage = new Storage();
-        Scanner scanner = new Scanner(System.in);
+        try (Ui ui = new Ui()) {
+            MealMeter mealMeter = new MealMeter();
 
-        boolean shouldContinue = true;
+            ui.showMessage(ui.getWelcomeMessage());
+            if (mealMeter.hasStorageLoadFailure()) {
+                ui.showMessage(ui.getStorageLoadWarningMessage());
+            }
+            for (String warning : mealMeter.getStartupStorageWarnings()) {
+                ui.showMessage(ui.formatStorageWarningMessage(warning));
+            }
 
-        while (shouldContinue) {
-            System.out.print("> ");
-            String userInput = scanner.nextLine();
-            Command command = CommandParser.getCommand(userInput);
-            try {
-                String output = command.execute(reviewList, storage);
-                System.out.println(output);
-                shouldContinue = !command.isTerminatingCommand();
-            } catch (InvalidArgumentException | MissingArgumentException | IOException e) {
-                System.out.println(e.getMessage());
+            boolean shouldContinue = true;
+            while (shouldContinue) {
+                ui.showPrompt();
+                String userInput = ui.readCommand();
+
+                CommandResult commandResult = mealMeter.handleInput(userInput);
+                ui.showMessage(commandResult.output());
+
+                shouldContinue = !commandResult.shouldTerminate();
             }
         }
     }
