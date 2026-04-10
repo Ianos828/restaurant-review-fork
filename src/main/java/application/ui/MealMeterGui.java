@@ -15,6 +15,7 @@ import application.MealMeter;
 import application.command.AddReviewCommand;
 import application.command.AddTagsCommand;
 import application.command.Command;
+import application.command.DeleteReviewCommand;
 import application.exception.InvalidArgumentException;
 import application.review.Review;
 import application.review.ReviewList;
@@ -215,8 +216,8 @@ public class MealMeterGui extends JFrame implements
         if (masterIdx < 0) {
             return;
         }
-
-        CommandResult result = mealMeter.handleInput("delete " + masterIdx);
+        Command command = new DeleteReviewCommand(masterIdx);
+        CommandResult result = mealMeter.handleInput(command);
         JOptionPane.showMessageDialog(this, result.output(), "Delete",
                 JOptionPane.INFORMATION_MESSAGE);
         currentDisplayList = mealMeter.getReviewList();
