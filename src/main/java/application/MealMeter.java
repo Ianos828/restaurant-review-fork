@@ -12,8 +12,6 @@ import application.command.Command;
 import application.condition.Condition;
 import application.condition.GreaterThanOrEqualsToCondition;
 import application.exception.InvalidArgumentException;
-import application.exception.MissingArgumentException;
-import application.parser.CommandParser;
 import application.parser.ConditionParser;
 import application.review.Criterion;
 import application.review.Review;
@@ -120,20 +118,18 @@ public class MealMeter {
     /**
      * Handles one user input command and returns the command result.
      *
-     * @param userInput the raw user input
+     * @param command the command object to execute
      * @return the result containing output and termination status
      */
-    public CommandResult handleInput(String userInput) {
+    public CommandResult handleInput(Command command) {
         try {
-            Command command = CommandParser.getCommand(userInput);
-
             if (command.requiresOwnerAuthentication() && !authManager.isOwnerAuthenticated()) {
                 return new CommandResult(ACCESS_DENIED_MESSAGE, false);
             }
 
             String output = command.execute(reviewList, storage, authManager);
             return new CommandResult(output, command.isTerminatingCommand());
-        } catch (InvalidArgumentException | MissingArgumentException | IOException e) {
+        } catch (InvalidArgumentException | IOException e) {
             return new CommandResult(e.getMessage(), false);
         } catch (Exception e) {
             return new CommandResult("An unexpected error occurred: " + e.getMessage(), false);
