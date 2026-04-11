@@ -14,7 +14,7 @@ import application.review.ReviewList;
 
 /**
  * Main GUI window for MealMeterController. Coordinates between patron and owner panels,
- * forwarding all events to the backend via MealMeterController.handleInput().
+ * forwarding all events to the backend via MealMeterController.
  *
  * <p>The GUI contains no business logic. All operations are expressed as
  * command strings passed to the backend (MVC controller layer).</p>
@@ -111,6 +111,14 @@ public class MealMeterGui extends JFrame implements
 
     // ── OwnerPanelListener ──────────────────────────────────────────────────
 
+    /**
+     * Called when a filter is applied.
+     *
+     * @param includeTags the tags to include in the filter
+     * @param excludeTags the tags to exclude from the filter
+     * @param status the status of the reviews to include in the filter
+     * @param conditions the conditions to filter by, e.g. "food > 3.5"
+     */
     @Override
     public void onFilterApplied(String includeTags,
                                 String excludeTags,
@@ -126,6 +134,12 @@ public class MealMeterGui extends JFrame implements
         ownerPanel.refreshTable(currentDisplayList);
     }
 
+    /**
+     * Called when a sort is applied.
+     *
+     * @param sortBy the criterion to sort by
+     * @param sortOrder the order to sort in, either "Ascending" or "Descending"
+     */
     @Override
     public void onSortApplied(String sortBy, String sortOrder) {
         CommandResult result = mealMeterController.sortReviews(sortBy, sortOrder);
@@ -137,6 +151,11 @@ public class MealMeterGui extends JFrame implements
         ownerPanel.refreshTable(currentDisplayList);
     }
 
+    /**
+     * Called when a review is resolved.
+     *
+     * @param rowIndex the row index of the review to resolve
+     */
     @Override
     public void onResolveReview(int rowIndex) {
         CommandResult result = mealMeterController.resolveReview(currentDisplayList, rowIndex);
@@ -145,6 +164,11 @@ public class MealMeterGui extends JFrame implements
         ownerPanel.refreshTable(currentDisplayList);
     }
 
+    /**
+     * Called when a review is unresolved.
+     *
+     * @param rowIndex the row index of the review to unresolve
+     */
     @Override
     public void onUnresolveReview(int rowIndex) {
         CommandResult result = mealMeterController.unresolveReview(currentDisplayList, rowIndex);
@@ -153,6 +177,11 @@ public class MealMeterGui extends JFrame implements
         ownerPanel.refreshTable(currentDisplayList);
     }
 
+    /**
+     * Called when a review is tagged.
+     *
+     * @param rowIndex the row index of the review to add tags to
+     */
     @Override
     public void onAddTagReview(int rowIndex) {
         try {
@@ -180,6 +209,11 @@ public class MealMeterGui extends JFrame implements
         }
     }
 
+    /**
+     * Called when a review is untagged.
+     *
+     * @param rowIndex the row index of the review to delete tags from
+     */
     @Override
     public void onDeleteTagReview(int rowIndex) {
         try {
@@ -207,6 +241,11 @@ public class MealMeterGui extends JFrame implements
         }
     }
 
+    /**
+     * Called when a review is deleted.
+     *
+     * @param rowIndex the row index of the review to delete
+     */
     @Override
     public void onDeleteReview(int rowIndex) {
         int confirm = JOptionPane.showConfirmDialog(this,
@@ -223,6 +262,9 @@ public class MealMeterGui extends JFrame implements
         ownerPanel.refreshTable(currentDisplayList);
     }
 
+    /**
+     * Called when the refresh button is pressed.
+     */
     @Override
     public void onRefresh() {
         currentDisplayList = mealMeterController.getReviewList();
@@ -230,6 +272,9 @@ public class MealMeterGui extends JFrame implements
         JOptionPane.showMessageDialog(this, "Refreshed.", "Done", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Called when the logout button is pressed.
+     */
     @Override
     public void onLogout() {
         CommandResult result = mealMeterController.logout();
