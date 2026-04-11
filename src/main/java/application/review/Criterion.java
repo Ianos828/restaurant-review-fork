@@ -45,8 +45,7 @@ public enum Criterion {
         }
 
         for (Criterion criterion : Criterion.values()) {
-            if (criterion.criterionString
-                    .startsWith(criterionString.toLowerCase())) {
+            if (criterion.criterionString.equals(criterionString)) {
                 return criterion;
             }
         }

@@ -6,9 +6,9 @@ import application.parser.ArgumentParser;
  * Enum representing the different sort orders.
  */
 public enum SortOrder {
-    ASCENDING("ascending"),
-    DESCENDING("descending"),
-    UNKNOWN("unknown");
+    ASCENDING("Ascending"),
+    DESCENDING("Descending"),
+    UNKNOWN("Unknown");
 
     private final String sortOrderString;
 
@@ -33,7 +33,7 @@ public enum SortOrder {
         }
 
         for (SortOrder order : SortOrder.values()) {
-            if (order.sortOrderString.startsWith(sortOrderString.toLowerCase())) {
+            if (order.sortOrderString.equals(sortOrderString)) {
                 return order;
             }
         }
