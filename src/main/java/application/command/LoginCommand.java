@@ -31,19 +31,27 @@ public class LoginCommand extends Command {
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string indicating the result of the login command
+     * @return a {@code CommandResult} object containing the result of the command execution
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
     ) {
         if (manager.isOwnerAuthenticated()) {
-            return "You are already logged in!";
+            return new CommandResult(
+                    "You are already logged in!",
+                    isTerminatingCommand(),
+                    reviews
+            );
         }
 
         boolean isLoggedIn = manager.authenticateOwner(password);
-        return isLoggedIn ? "Successfully logged in!" : "Incorrect password!";
+        return new CommandResult(
+                isLoggedIn ? "Successfully logged in!" : "Incorrect password!",
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }

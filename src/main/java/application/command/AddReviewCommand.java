@@ -54,11 +54,11 @@ public class AddReviewCommand extends Command {
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string representation of the command result
+     * @return a {@code CommandResult} object containing the result of the command execution
      * @throws InvalidArgumentException if any argument is in the wrong format
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
@@ -97,6 +97,10 @@ public class AddReviewCommand extends Command {
         reviews.addReview(review);
         storage.saveReviews(reviews);
 
-        return String.format("Added review to list:\n%s", review);
+        return new CommandResult(
+                String.format("Added review to list:\n%s", review),
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }

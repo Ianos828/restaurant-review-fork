@@ -38,11 +38,11 @@ public class DeleteTagsCommand extends Command {
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string representation of the command result
+     * @return a {@code CommandResult} object containing the result of the command execution
      * @throws InvalidArgumentException if any argument is in the wrong format
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
@@ -56,10 +56,14 @@ public class DeleteTagsCommand extends Command {
         existingTags.forEach(review::removeTag);
         storage.saveReviews(reviews);
 
-        return String.format("""
+        return new CommandResult(
+                String.format("""
                 Tags that do not exist in review: %s
                 Tags deleted: %s
                 Updated review:
-                %s""", nonExistentTags, existingTags, review);
+                %s""", nonExistentTags, existingTags, review),
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }

@@ -47,10 +47,10 @@ public class FilterReviewsCommand extends Command {
      * @param reviews the list of reviews to filter
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string representation of the filtered list of reviews
+     * @return a {@code CommandResult} object containing the result of the command execution
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
@@ -68,7 +68,8 @@ public class FilterReviewsCommand extends Command {
                 isResolved
         );
 
-        return String.format("""
+        return new CommandResult(
+                String.format("""
                 Filter criteria:
                 Tags to include: %s
                 Tags to exclude: %s
@@ -76,11 +77,14 @@ public class FilterReviewsCommand extends Command {
                 Resolved status: %s
                 Filtered reviews:
                 %s""",
-                tagsToInclude.isEmpty() ? "None specified" : tagsToInclude,
-                tagsToExclude.isEmpty() ? "None specified" : tagsToExclude,
-                filterConditions.isEmpty() ? "None specified" : filterConditions.stream()
-                        .filter(Condition::shouldDisplay).toList(),
-                isResolved == null ? "Not specified" : isResolved,
+                        tagsToInclude.isEmpty() ? "None specified" : tagsToInclude,
+                        tagsToExclude.isEmpty() ? "None specified" : tagsToExclude,
+                        filterConditions.isEmpty() ? "None specified" : filterConditions.stream()
+                                .filter(Condition::shouldDisplay).toList(),
+                        isResolved == null ? "Not specified" : isResolved,
+                        filteredReviews
+                ),
+                isTerminatingCommand(),
                 filteredReviews
         );
     }

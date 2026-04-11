@@ -29,11 +29,11 @@ public class DeleteReviewCommand extends Command {
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string representation of the command result
+     * @return a {@code CommandResult} object containing the result of the command execution
      * @throws InvalidArgumentException if the index is in the wrong format
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
@@ -41,6 +41,10 @@ public class DeleteReviewCommand extends Command {
         Review review = reviews.deleteReview(index);
         storage.saveReviews(reviews);
 
-        return String.format("%s\ndeleted!", review);
+        return new CommandResult(
+                String.format("%s\ndeleted!", review),
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }

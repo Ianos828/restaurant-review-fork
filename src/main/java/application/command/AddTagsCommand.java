@@ -38,11 +38,11 @@ public class AddTagsCommand extends Command {
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string representation of the command result
+     * @return a {@code CommandResult} object containing the result of the command execution
      * @throws InvalidArgumentException if any argument is in the wrong format
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
@@ -56,10 +56,14 @@ public class AddTagsCommand extends Command {
         nonExistentTags.forEach(review::addTag);
         storage.saveReviews(reviews);
 
-        return String.format("""
+        return new CommandResult(
+                String.format("""
                 Existing tags not added: %s
                 New tags added: %s
                 Updated review:
-                %s""", existingTags, nonExistentTags, review);
+                %s""", existingTags, nonExistentTags, review),
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }

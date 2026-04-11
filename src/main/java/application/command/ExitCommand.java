@@ -14,19 +14,23 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns a message indicating that the program has exited.
+     * Returns a {@code CommandResult} object indicating that the program has exited.
      *
      * @param reviews the list of reviews
      * @param storage the storage object
      * @param manager the authentication manager
-     * @return a string indicating that the program has exited
+     * @return a {@code CommandResult} object containing the result of the command execution
      */
     @Override
-    public String execute(
+    public CommandResult execute(
             ReviewList reviews,
             Storage storage,
             AuthManager manager
     ) {
-        return "Goodbye!";
+        return new CommandResult(
+                "Goodbye!",
+                isTerminatingCommand(),
+                reviews
+        );
     }
 }
