@@ -236,6 +236,8 @@ public class MealMeterGui extends JFrame implements
         JOptionPane.showMessageDialog(this, result.output(), "Logout",
                 JOptionPane.INFORMATION_MESSAGE);
         tabbedPane.setSelectedIndex(PATRON_TAB_INDEX);
+        currentDisplayList.clear();
+        ownerPanel.refreshTable(currentDisplayList);
     }
 
     // ── Private helpers ──────────────────────────────────────────────────────

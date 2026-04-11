@@ -167,4 +167,11 @@ public class ReviewListTest {
         assertEquals(1, model.getValueAt(0, 0));
         assertEquals(2, model.getValueAt(1, 0));
     }
+
+    @Test
+    public void clearReviewList_workCorrectly() {
+        // Partition: Clear the list
+        reviewList.clear();
+        assertEquals(0, reviewList.size());
+    }
 }
