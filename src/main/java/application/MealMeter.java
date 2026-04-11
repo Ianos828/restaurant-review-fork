@@ -123,10 +123,7 @@ public class MealMeter {
                         reviewList);
             }
 
-            String output = command.execute(reviewList, storage, authManager);
-            return new CommandResult(output,
-                    command.isTerminatingCommand(),
-                    reviewList);
+            return command.execute(reviewList, storage, authManager);
         } catch (InvalidArgumentException | IOException e) {
             return new CommandResult(e.getMessage(),
                     false,
