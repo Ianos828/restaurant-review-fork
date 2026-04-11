@@ -64,6 +64,87 @@ public class Review {
     }
 
     /**
+     * Returns the food score.
+     *
+     * @return the food score
+     */
+    public double getFoodScore() {
+        return rating.getFoodScore();
+    }
+
+    /**
+     * Returns the food score as a string.
+     *
+     * @return the food score as a string
+     */
+    public String getFoodScoreString() {
+        return rating.getFoodScoreString();
+    }
+
+    /**
+     * Returns the cleanliness score.
+     *
+     * @return the cleanliness score
+     */
+    public double getCleanlinessScore() {
+        return rating.getCleanlinessScore();
+    }
+
+    /**
+     * Returns the cleanliness score as a string.
+     *
+     * @return the cleanliness score as a string
+     */
+    public String getCleanlinessScoreString() {
+        return rating.getCleanlinessScoreString();
+    }
+
+    /**
+     * Returns the service score.
+     *
+     * @return the service score
+     */
+    public double getServiceScore() {
+        return rating.getServiceScore();
+    }
+
+    /**
+     * Returns the service score as a string.
+     *
+     * @return the service score as a string
+     */
+    public String getServiceScoreString() {
+        return rating.getServiceScoreString();
+    }
+
+    /**
+     * Returns the derived overall score.
+     *
+     * @return the average of the three category ratings
+     */
+    public double getOverallScore() {
+        return rating.getOverallScore();
+    }
+
+    /**
+     * Returns the overall score as a string.
+     *
+     * @return the overall score as a string
+     */
+    public String getOverallScoreString() {
+        return rating.getOverallScoreString();
+    }
+
+    /**
+     * Returns the string representation of the rating.
+     *
+     * @return the rating string
+     */
+    public String getRatingString() {
+        return rating.toString();
+    }
+
+    /**
      * Returns a string containing the tag names, sorted alphabetically
      *
      * @return a string containing the tag names, sorted alphabetically

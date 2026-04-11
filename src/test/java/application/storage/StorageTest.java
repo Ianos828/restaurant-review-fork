@@ -80,9 +80,9 @@ public class StorageTest {
 
         assertEquals(1, loaded.size());
         Review loadedReview = loaded.getReview(1);
-        assertEquals(4.5, loadedReview.getRating().getFoodScore(), 0.0001);
-        assertEquals(4.0, loadedReview.getRating().getCleanlinessScore(), 0.0001);
-        assertEquals(3.5, loadedReview.getRating().getServiceScore(), 0.0001);
+        assertEquals(4.5, loadedReview.getFoodScore(), 0.0001);
+        assertEquals(4.0, loadedReview.getCleanlinessScore(), 0.0001);
+        assertEquals(3.5, loadedReview.getServiceScore(), 0.0001);
         assertTrue(loadedReview.isResolved());
         assertTrue(loadedReview.getTags().contains(new Tag("service")));
         assertTrue(loadedReview.getTags().contains(new Tag("slow delivery")));

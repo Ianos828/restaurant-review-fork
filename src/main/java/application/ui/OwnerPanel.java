@@ -275,13 +275,12 @@ public class OwnerPanel extends JPanel {
         for (int i = 0; i < reviewsAsList.size(); i++) {
             Review r = reviewsAsList.get(i);
             String tags = r.getTagsAsString();
-            Rating rating = r.getRating();
             tableModel.addRow(new Object[]{
                 i + 1,
-                rating.getOverallScoreString(),
-                rating.getFoodScoreString(),
-                rating.getCleanlinessScoreString(),
-                rating.getServiceScoreString(),
+                r.getOverallScoreString(),
+                r.getFoodScoreString(),
+                r.getCleanlinessScoreString(),
+                r.getServiceScoreString(),
                 r.isResolved() ? "Resolved" : "Outstanding",
                 tags,
                 r.getReviewBody()

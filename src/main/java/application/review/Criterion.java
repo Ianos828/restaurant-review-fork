@@ -8,10 +8,10 @@ import application.parser.ArgumentParser;
  * Enum representing the different criteria for ReviewList operations.
  */
 public enum Criterion {
-    OVERALL_SCORE("Overall", review -> review.getRating().getOverallScore()),
-    FOOD_SCORE("Food", review -> review.getRating().getFoodScore()),
-    CLEANLINESS_SCORE("Cleanliness", review -> review.getRating().getCleanlinessScore()),
-    SERVICE_SCORE("Service", review -> review.getRating().getServiceScore()),
+    OVERALL_SCORE("Overall", Review::getOverallScore),
+    FOOD_SCORE("Food", Review::getFoodScore),
+    CLEANLINESS_SCORE("Cleanliness", Review::getCleanlinessScore),
+    SERVICE_SCORE("Service", Review::getServiceScore),
     TAG_COUNT("Tag Count", review -> (double) review.getTags().size()),
     UNKNOWN("Unknown", review -> 0.0);
 
