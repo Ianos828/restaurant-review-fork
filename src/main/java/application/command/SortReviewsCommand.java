@@ -1,8 +1,5 @@
 package application.command;
 
-import java.util.Map;
-import java.util.Set;
-
 import application.auth.AuthManager;
 import application.exception.InvalidArgumentException;
 import application.review.Criterion;
