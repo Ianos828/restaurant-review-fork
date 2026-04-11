@@ -136,14 +136,13 @@ public class MealMeterGui extends JFrame implements
 
     @Override
     public void onSortApplied(String sortBy, String sortOrder) {
-        String criterionArg = mapSortByToCriterionArg(sortBy);
-        String orderArg = sortOrder.toLowerCase();
-        CommandResult result = mealMeter.handleInput("sort " + orderArg + " /by " + criterionArg);
+        Command command = new SortReviewsCommand(sortOrder, sortBy);
+        CommandResult result = mealMeter.handleInput(command);
 
         JOptionPane.showMessageDialog(this, result.output(), "Sort Applied",
                 JOptionPane.INFORMATION_MESSAGE);
 
-        currentDisplayList = mealMeter.sortReviews(sortBy, sortOrder, currentDisplayList);
+        currentDisplayList = result.reviews();
         ownerPanel.refreshTable(currentDisplayList);
     }
 
@@ -153,7 +152,8 @@ public class MealMeterGui extends JFrame implements
         if (masterIdx < 0) {
             return;
         }
-        CommandResult result = mealMeter.handleInput("resolve " + masterIdx);
+        Command command = new ResolveReviewCommand(masterIdx);
+        CommandResult result = mealMeter.handleInput(command);
         JOptionPane.showMessageDialog(this, result.output(), "Resolve",
                 JOptionPane.INFORMATION_MESSAGE);
         ownerPanel.refreshTable(currentDisplayList);

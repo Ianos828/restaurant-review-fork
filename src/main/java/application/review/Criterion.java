@@ -8,12 +8,12 @@ import application.parser.ArgumentParser;
  * Enum representing the different criteria for ReviewList operations.
  */
 public enum Criterion {
-    OVERALL_SCORE("overall scores", review -> review.getRating().getOverallScore()),
-    FOOD_SCORE("food scores", review -> review.getRating().getFoodScore()),
-    CLEANLINESS_SCORE("clean scores", review -> review.getRating().getCleanlinessScore()),
-    SERVICE_SCORE("service scores", review -> review.getRating().getServiceScore()),
-    TAG_COUNT("tag count", review -> (double) review.getTags().size()),
-    UNKNOWN("unknown", review -> 0.0);
+    OVERALL_SCORE("Overall", review -> review.getRating().getOverallScore()),
+    FOOD_SCORE("Food", review -> review.getRating().getFoodScore()),
+    CLEANLINESS_SCORE("Cleanliness", review -> review.getRating().getCleanlinessScore()),
+    SERVICE_SCORE("Service", review -> review.getRating().getServiceScore()),
+    TAG_COUNT("Tag Count", review -> (double) review.getTags().size()),
+    UNKNOWN("Unknown", review -> 0.0);
 
     private final String criterionString;
     private final Function<Review, Double> criterionFunction;
