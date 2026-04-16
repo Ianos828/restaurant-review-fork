@@ -1,5 +1,7 @@
 # Software Design Document (SDD)
 
+---
+
 ## System Overview
 MealMeter is a desktop-based restaurant feedback system intended for deployment at restaurant point-of-sale terminals or customer kiosks.
 
