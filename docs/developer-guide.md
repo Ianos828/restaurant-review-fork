@@ -6,11 +6,11 @@ This section covers the technical documentation of MealMeter. The following docu
 implementation of MealMeter.
 
 # Table of Contents
-1. [Project Requirements Document](PRD.md)
-2. [Software Design Document](SDD.md)
+1. [Project Requirements Document](developer-guide/PRD.md)
+2. [Software Design Document](developer-guide/SDD.md)
 3. API Documentation
-   1. [Logic Component API](api/logic-API.md)
-   2. [Storage Component API](api/storage-API.md)
+   1. [Logic Component API](developer-guide/api/logic-API.md)
+   2. [Storage Component API](developer-guide/api/storage-API.md)
 4. [User Guide](user-guide.md)
 
 ## Prerequisites
