@@ -151,7 +151,13 @@ Filtering Reviews
 ### Use Case Diagram
 
 ![Use Case Diagram](/docs/architecture/use-case-diagram.png)
-Use Case Diagram
+
+The above depicts the use case diagram of the application. The application is designed to be used by both restaurant
+patrons and restaurant owners. However, most of the features are only available to restaurant owners, with patrons only
+being able to leave a review. To access the owner features, the user must log in.
+
+Additionally, as stated in the [Logic class diagram section](#logic-class-diagram), only actions that modify the model
+will invoke the storage layer to save the updated model to the data file.
 
 ### Use Cases
 
@@ -264,6 +270,13 @@ Use Case Diagram
 > **3.** MealMeter filters the reviews based on the criterion\
 > **7.** MealMeter shows the new filtered list\
 > Use case ends.
+>
+> **Extensions:**\
+> **2a.** MealMeter detects an invalid filter criterion\
+> **2a1.** MealMeter shows an error message\
+> **2a2.** Restaurant Owner is prompted to input a valid filter criterion\
+> Steps 2a1 and 2a2 are repeated until the selection is valid.
+> Use case resumes from step 3.
 
 </details>
 
@@ -271,27 +284,30 @@ Use Case Diagram
 
 ## Design Details
 
-### `Ui`
-The `Ui` class handles interaction with the user. It is responsible for collecting user input and displaying output messages.
+### `MealMeterGui`
+The `MealMeterGui` class handles interaction with the user. It is responsible for collecting user input and displaying
+output messages.
 
 **Main responsibilities:**
 - Read user input
 - Display system messages
 
-### `CommandParser`
-The `CommandParser` class interprets raw user input and converts it into a `Command` object that can be executed by the system.
+### `MealMeterController`
+The `MealMeterController` class is responsible for executing user actions. The controller passes user input from
+`MealMeterGui` to the respective `Command` objects and returns a `CommandResult` to `MealMeterGui` after the action is
+completed.
 
 **Main responsibilities:**
-- Parse command keywords
-- Extract command arguments
 - Construct the appropriate `Command`
+- Execute the command
+- Return a `CommandResult` to `MealMeterGui`
 
 ### `Command`
 The `Command` class represents an executable user instruction. Each command stores the information needed for execution.
 
 **Main responsibilities:**
 - Represent a user action
-- Execute logic on the review list
+- Execute logic on the `ReviewList`
 - Interact with storage when needed
 
 ### `Review`
@@ -349,13 +365,16 @@ The system uses structured rating categories:
 This allows restaurants to analyse feedback more effectively than relying only on free-text reviews.
 
 ### Immediate Feedback Collection
-Feedback is collected directly at the point of sale. This improves response rates and helps restaurants capture impressions while the dining experience is still fresh in the patron’s mind.
+Feedback is collected directly at the point of sale. This improves response rates and helps restaurants capture
+impressions while the dining experience is still fresh in the patron’s mind.
 
 ### Layered Architecture
-A 4-tier architecture was chosen to separate presentation, logic, and storage concerns. This improves modularity and makes future enhancements easier to implement.
+A 4-tier architecture was chosen to separate presentation, logic, and storage concerns. This improves modularity and
+makes future enhancements easier to implement.
 
 ### Local File Storage
-The system uses local file-based storage instead of a server-based backend. This keeps deployment simple and aligns with the intended lightweight desktop application design.
+The system uses local file-based storage instead of a server-based backend. This keeps deployment simple and aligns
+with the intended lightweight desktop application design.
 
 ---
 
@@ -363,4 +382,3 @@ The system uses local file-based storage instead of a server-based backend. This
 The following supporting diagrams should be added to complete this document:
 
 - Sequence diagram for deleting a review
-- Use case diagram
