@@ -144,14 +144,20 @@ interactions.
 
 ---
 
-#### Feature: Adding tags to a review
+#### Feature: Adding Tags to a Review
 ![Sequence Diagram](/docs/architecture/seq-diagram-add-tag.png)
 
-![Sequence Diagram](/docs/architecture/seq-diagram-sort.png)
-Sorting Reviews
+---
 
+#### Feature: Sorting Reviews
+![Sequence Diagram](/docs/architecture/seq-diagram-sort.png)
+
+---
+
+#### Feature: Filtering Reviews
 ![Sequence Diagram](/docs/architecture/seq-diagram-filter.png)
-Filtering Reviews
+
+---
 
 ### Use Case Diagram
 
