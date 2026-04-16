@@ -164,23 +164,22 @@ Use Case Diagram
 > **Precondition:** Restaurant Patron is at the point of sale and is presented with the GUI\
 > **MSS:**\
 > **1.** Restaurant Patron enters a rating for the food, cleanliness, and service\
-> **2.** MealMeter validates the rating inputs\
-> **3.** Restaurant Patron enters a review\
-> **4.** Restaurant Patron submits the review\
+> **2.** Restaurant Patron enters a review\
+> **3.** Restaurant Patron submits the review\
+> **4.** MealMeter validates the review inputs\
 > **5.** MealMeter shows a success message\
 > **6.** MealMeter saves the review to the data file\
 > Use case ends.
 > 
 > **Extensions:**\
-> **2a.** MealMeter detects an invalid rating input\
-> **2a1.** MealMeter shows an error message\
-> **2a2.** Restaurant Patron is prompted to enter a valid rating\
-> Steps 2a1 and 2a2 are repeated until the rating is valid.
-> Use case resumes from step 3.
+> **4a.** MealMeter detects an invalid review input\
+> **4a1.** MealMeter shows an error message\
+> **4a2.** Restaurant Patron is prompted to enter a valid review\
+> Steps 4a1 and 4a2 are repeated until the review is valid.
+> Use case resumes from step 5.
 > 
-> **\*a.** At any time, Restaurant Patron chooses to cancel the review submission\
-> **\*a1.** MealMeter requests to confirm the cancellation\
-> **\*a2.** Restaurant Patron confirms the cancellation\
+> **\*a.** At any time, Restaurant Patron chooses to clear the review submission form\
+> **\*a1.** MealMeter clears the review submission form\
 > Use case ends.
 </details>
 
@@ -195,19 +194,18 @@ Use Case Diagram
 > **MSS:**\
 > **1.** Restaurant Owner views all reviews\
 > **2.** Restaurant Owner selects the review to be deleted\
-> **3.** MealMeter validates the selection\
-> **4.** MealMeter requests to confirm the deletion\
-> **5.** Restaurant Owner confirms the deletion\
-> **6.** MealMeter deletes the review from the data file\
-> **7.** MealMeter shows a success message\
+> **3.** Restaurant Owner presses the delete button\
+> **4.** MealMeter validates the selection\
+> **5.** MealMeter deletes the review from the data file\
+> **6.** MealMeter shows a success message\
 > Use case ends.
 > 
 > **Extensions:**\
-> **3a.** MealMeter detects an invalid selection\
-> **3a1.** MealMeter shows an error message\
-> **3a2.** Restaurant Owner is prompted to select a valid review\
-> Steps 3a1 and 3a2 are repeated until the selection is valid.
-> Use case resumes from step 4.
+> **4a.** MealMeter detects an invalid selection\
+> **4a1.** MealMeter shows an error message\
+> **4a2.** Restaurant Owner is prompted to select a valid review\
+> Steps 4a1 and 4a2 are repeated until the selection is valid.
+> Use case resumes from step 5.
 </details>
 
 <details>
@@ -354,7 +352,7 @@ This allows restaurants to analyse feedback more effectively than relying only o
 Feedback is collected directly at the point of sale. This improves response rates and helps restaurants capture impressions while the dining experience is still fresh in the patron’s mind.
 
 ### Layered Architecture
-A 3-tier architecture was chosen to separate presentation, logic, and storage concerns. This improves modularity and makes future enhancements easier to implement.
+A 4-tier architecture was chosen to separate presentation, logic, and storage concerns. This improves modularity and makes future enhancements easier to implement.
 
 ### Local File Storage
 The system uses local file-based storage instead of a server-based backend. This keeps deployment simple and aligns with the intended lightweight desktop application design.
