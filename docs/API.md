@@ -2,6 +2,8 @@
 
 This file documents the important APIs exposed by `MealMeterController` to `MealMeterGui`.
 
+---
+
 ## 1. `submitReview()`
 
 ### Description
@@ -26,6 +28,8 @@ Submits a user review based on the user input from `MealMeterGui` in the `Patron
 
 `mealMeterController.submitReview("Good!", 5.0, 5.0, 5.0, "positive, fullScore");`
 
+---
+
 ## 2. `filterReviews()`
 ### Description
 Filters the reviews in the displayed `ReviewList` based on the user criteria specified in the `Owner Management` tab.
@@ -49,6 +53,8 @@ Filters the reviews in the displayed `ReviewList` based on the user criteria spe
 
 `mealMeterController.filterReviews("positive", "negative", "Resolved", "cleanliness == 5");`
 
+---
+
 ## 3. `sortReviews()`
 
 ### Description
@@ -70,6 +76,8 @@ Sorts the reviews in the displayed `ReviewList` based on specified user criteria
 ### Example Usage
 
 `mealMeterController.sortReviews("Food", "Descending");`
+
+---
 
 ## 4. `resolveReview()`, `unresolveReview()`
 
@@ -98,6 +106,8 @@ The methods are executed on the selected `Review`  in the displayed `ReviewList`
 `mealMeterController.resolveReview(reviews, 1);`
 
 `mealMeterController.unresolveReview(reviews, 2);`
+
+---
 
 ## 5. `addTags()`, `deleteTags()`
 
@@ -128,6 +138,8 @@ The methods are executed on the selected `Review` in the displayed `ReviewList` 
 
 `mealMeterController.deleteTags(reviews, 2, "tag3");`
 
+---
+
 ## 5. `deleteReview()`
 
 ### Description
@@ -154,6 +166,8 @@ in the `Owner Management` tab.
 
 `mealMeterController.deleteReview(reviews, 1);`
 
+---
+
 ## 6. `login()`
 
 ### Description
@@ -172,6 +186,8 @@ Logs the user in with the specified password. This grants the user access to the
 
 ### Example Usage
 `mealMeterController.login("password");`
+
+---
 
 ## 7. `logout()`
 
