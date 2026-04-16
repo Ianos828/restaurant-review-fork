@@ -130,17 +130,22 @@ The `Model` loaded into memory is done by the `Storage` component on application
 ![Storage Class Diagram](/docs/architecture/storage-class-diagram.png)
 
 ### Sequence Diagrams
-![Sequence Diagram](/docs/architecture/seq-diagram-init-and-end.png)
-Initialisation and Program End
+This section depicts the sequence diagrams of the application. The diagrams are non-exhaustive and only show the
+important parts of the application. For simplicity's sake, the sequence diagrams do not depict internal `MealMeterGui`
+interactions.
 
+#### Feature: Adding a Review
 ![Sequence Diagram](/docs/architecture/seq-diagram-add-review.png)
-Adding a Review
 
+---
+
+#### Feature: Deleting a Review
 ![Sequence Diagram](/docs/architecture/seq-diagram-delete-review.png)
-Deleting a Review
 
+---
+
+#### Feature: Adding tags to a review
 ![Sequence Diagram](/docs/architecture/seq-diagram-add-tag.png)
-Adding a Tag to a Review
 
 ![Sequence Diagram](/docs/architecture/seq-diagram-sort.png)
 Sorting Reviews
